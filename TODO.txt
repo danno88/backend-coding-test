@@ -1,0 +1,14 @@
+
+TODO AlchemyTec Coding Test:
+
+
+- del index.html and make default.html default
+- make junit tests of the webservices (a webseervice java ee 7 client that calls them)
+ 
+- once web code can call my code api, fork repo and start from scxratch and call project AlchemyCodingTest and webpath / or /alchemy/ (and + api/)
+
+- beautify
+
+
+- don't do these:
+    - move static/ folder somewhere appropriately? (note: resources/static/ does not work, not copied into webapp dir by maven, could just leave static in webapp folder as is!)
