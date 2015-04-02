@@ -39,8 +39,13 @@ app.config(["$routeProvider", function($routeProvider) {
 	$routeProvider.when("/version", { templateUrl: "version-content.html" });
 }]);
 
+app.config(function(RestangularProvider) {
+	//Set URL prefix to Webservices API for Restangular:
+        RestangularProvider.setBaseUrl('/api');
+});
+
 app.run(["$rootScope", function($rootScope) {
-	// Basic config options
+        // Basic config options
 	var gulpBuildConfig = {};
 	$rootScope.config = angular.extend({ angular: angular.version.full }, gulpBuildConfig);
 	
