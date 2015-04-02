@@ -1,5 +1,10 @@
 
 TODO AlchemyTec Coding Test:
+- KIND OF WORKING SOMETIMES AND ONLY WITH NO API PREFIX:
+ now it is working sometimes, but api is at localhost:8080/expenses
+  and website at localhost:8080/default.html (no api prefix).
+==> works for adding data once or so in chromium with netbeans connector, (then added a line with firefox), then reloaded chromium, then showed 404 does not exist (from now on chromium with netbeans connector will say localhost:8080 does not exist, localhost:8080/index.html does not exist, localhost:8080/default.hmlt does not exist, BUT FIREFOX WILL STILL DISPLAY ALL THESE PAGES AND EVEN ADD NEW ENTRIES INTO THE DB THAT ACTUALLY SHOW UP INSIDE MYSQL TABLE!!
+ -> TRY TO PUT API INTO api/ PREFIX (easy to do in java, but in angular need to edit angular.services.js (line 139 or so) AND THEN RECOMPILE THE JS STUFF WITH gulp??
 
 
 - del index.html and make default.html default

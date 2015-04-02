@@ -1,3 +1,50 @@
+Installation
+------------
+
+Without IDE in command line:
+TODO!
+
+
+In Netbeans or Eclipse:
+Open as existing Maven project in Netbeans or Eclipse. 
+Edit project properties and ensure the context path (in Netbeans run submenu) is set to '/'. 
+Create connection pool in Glassfish admin console (or the Java EE 7 application server of your choice):
+ - new JDBC connection pool (NOTE: set these values according to your local database location and type):
+    - pool name: AlchemyCodingTestPool
+    - resource type: javax.sql.DataSource
+    - datasource classname: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
+    - description: Connection Pool for AlchemyCodingTest RESTful WS App
+    - add these properties to the connection pool (NOTE: set these values according to your local database location):
+        - URL = jdbc:mysql://localhost:3306/alchemytectest
+        - url = jdbc:mysql://localhost:3306/alchemytectest
+        - User = XXXXX
+        - Password = YYYY
+
+
+- Create JDBC resource which uses the connection pool.
+    - JNDI name: jdbc/alchemycodingtest
+    - connection pool: AlchemyCodingTestPool
+    - description: DB for AlchemyCodingTest RESTful WS App
+
+
+TODO:
+create a table in your db and put 1 line of sample data in it (e.g. ...)
+may have to set context root for app to "/" in app server admin interface (e.g. glassfish admin console).
+
+
+Test if webservices are working:
+    - launch the appliacation and then try to access the Webservices API of the application, e.g. like this:
+        http://localhost:8080/api/expenses/
+        http://localhost:8080/api/expenses/1
+        http://localhost:8080/api/expenses/1/2
+
+    - then try to access the HTML part of the application:
+        http://localhost:8080/default.html
+
+
+
+
+
 Goal
 ====
 Produce a simple web-app backend to complement the supplied front-end code. Note that the front-end renders nicely in Chrome but has some issues in Firefox. This is deliberate - see the 'Extra Credit' section.
