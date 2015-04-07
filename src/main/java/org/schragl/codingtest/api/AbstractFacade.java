@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.schragl.alchemycodingtest.api;
+package org.schragl.codingtest.api;
 
 import java.util.List;
 import javax.persistence.EntityManager;

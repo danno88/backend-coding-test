@@ -1,5 +1,6 @@
 
 TODO AlchemyTec Coding Test:
+- TRY: gulp build after changing stuff to UI: then mvn clean install and then the default.html can't be loaded? try that again and see if there is a diff between gulp dev and gulp build OR if was just because I had an error somewhere in the js stuff that is gone now?!
 - KIND OF WORKING SOMETIMES AND ONLY WITH NO API PREFIX:
  now it is working sometimes, but api is at localhost:8080/expenses
   and website at localhost:8080/default.html (no api prefix).

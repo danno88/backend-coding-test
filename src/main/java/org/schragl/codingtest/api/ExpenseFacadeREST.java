@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.schragl.alchemycodingtest.api;
+package org.schragl.codingtest.api;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -17,7 +17,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import org.schragl.alchemycodingtest.Expense;
+import org.schragl.codingtest.Expense;
 
 /**
  *

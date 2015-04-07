@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.schragl.alchemycodingtest;
+package org.schragl.codingtest;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -34,23 +34,33 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Expense.findById", query = "SELECT e FROM Expense e WHERE e.id = :id"),
     @NamedQuery(name = "Expense.findByDate", query = "SELECT e FROM Expense e WHERE e.date = :date"),
     @NamedQuery(name = "Expense.findByAmount", query = "SELECT e FROM Expense e WHERE e.amount = :amount"),
+    @NamedQuery(name = "Expense.findByVat", query = "SELECT e FROM Expense e WHERE e.vat = :vat"),
     @NamedQuery(name = "Expense.findByReason", query = "SELECT e FROM Expense e WHERE e.reason = :reason")})
 public class Expense implements Serializable {
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "amount")
     private float amount;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "vat")
+    private float vat;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
@@ -67,10 +77,18 @@ public class Expense implements Serializable {
     public Expense(Integer id, Date date, float amount, String reason) {
         this.id = id;
         this.date = date;
-        this.amount = amount;
+        this.amount = amount;    //inc VAT
+        this.vat = amount / 6; //in UK: VAT always 20% of amount
         this.reason = reason;
     }
 
+    public Expense(Integer id, Date date, float amount, float vat, String reason) {
+        this.id = id;
+        this.date = date;
+        this.amount = amount;
+        this.vat = vat;
+        this.reason = reason;
+    }
     public Integer getId() {
         return id;
     }
@@ -93,6 +111,15 @@ public class Expense implements Serializable {
 
     public void setAmount(float amount) {
         this.amount = amount;
+        this.vat = amount / 6; //in UK: VAT always 20% of amount
+    }
+
+    public float getVat() {
+        return vat;
+    }
+
+    public void setVat(float vat) {
+        this.vat = vat;
     }
 
     public String getReason() {
@@ -125,7 +152,7 @@ public class Expense implements Serializable {
 
     @Override
     public String toString() {
-        return "org.schragl.alchemycodingtest.Expense[ id=" + id + " ]";
+        return "org.schragl.codingtest.Expense[ id=" + id + " ]";
     }
     
 }

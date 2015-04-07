@@ -1,7 +1,34 @@
 Installation
 ------------
 
+TODO:
+- try if changing the root element in the config (from "/" to "/api") that I tried first of all. might work and other stuff useless!?
+	- remove the /api/ prefix code that I made (I think in codingtest.js or main.js?)
+	- recompile
+		mvn clean
+	    gulp clean
+		gulp dev
+    - rebuild mvn:
+	   mvn clean install
+    - redply
+	- test with browser, should show the same dumb error message as at beginning again (can't access localhost:8080/expenses)!
+   ==> if no, mv clean again and rebuild mvn again and try again
+   ==> if yes, then now edit the root config thing, regulp, remvn, redelpy, test again: 
+	   does it work now? if yes, can keep that instead of the more complicated RestangularProfile? thing I added. if no, clean, remvn, retry. working now? if not, undo the root config setting, redo my RestangularProfile? thing, clean, rebuild gulp and mvn and test again.
+
+
+
+
 Merged the web front end with the new backend with Webservices API and persistence. 
+
+NOTE:
+	- what has changed from the original project and project layout of the front end project?
+		- the project structure has been modified slightly: The former src/ folder has been renamed to source/,
+		  the folder static/ renamed to src/main/webapp/static/. And the HTML files and the png file from the 
+		  root folder have been moved to src/main/webapp/.
+
+
+
 To build the new project:
     - edit the project so that it points to your database, e.g. a MySql DB:
         - create a DB schema (e.g. alchemytectest) and create a table Expense in it:

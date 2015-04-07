@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.schragl.alchemycodingtest.api;
+package org.schragl.codingtest.api;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -29,8 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(org.schragl.alchemycodingtest.CrossOriginResourceSharingFilter.class);
-        resources.add(org.schragl.alchemycodingtest.api.ExpenseFacadeREST.class);
-    }
-    
+        resources.add(org.schragl.codingtest.api.CrossOriginResourceSharingFilter.class);
+        resources.add(org.schragl.codingtest.api.ExpenseFacadeREST.class);
+    }    
 }
