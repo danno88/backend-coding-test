@@ -1,7 +1,4 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 package org.schragl.codingtest.api;
 
@@ -9,7 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
- *
+ * Provides standard methods and implementations for exposing Entities as web services API.
+ * 
  * @author dan
  */
 public abstract class AbstractFacade<T> {

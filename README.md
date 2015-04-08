@@ -1,62 +1,66 @@
+About
+=====
+
+This document describes the AlchemyCodingTest project, its layout as well as how to build and deploy it.
+This project contains both the HTML5 web front end as provided from AlchemyTec and a new Java EE backend
+that provides a web services API and persistence. 
+
+This project is a Maven project (see pom.xml), the front end code in it get's compiled using Gulp and Node.js.
+The whole project is also a Netbeans project that can be opened in Netbeans too (or imported as existing Maven
+project in Eclipse or other IDEs).
+
+
+
+NOTES:
+------
+
+NOTE:
+What has changed from the original project and project layout of the front end project?
+The front end project structure has been modified slightly: The former src/ folder has been renamed to source/,
+the folder static/ renamed to src/main/webapp/static/. And the HTML files and the png file from the root folder 
+have been moved to src/main/webapp/. The files in src/main/webapp/ comprise the front end of the deployed app.
+Most of the backend is in src/main/java/.
+
+
+NOTE:
+Building and deploying this project requires Java (>= 7), Glassfish (>= 4), a DB like MySQL, Maven, and optionally
+an IDE like Netbeans. For making changes to the front end Node.js and Gulp have to be installed too.
+
+
+
 Installation
 ------------
 
-TODO:
-- try if changing the root element in the config (from "/" to "/api") that I tried first of all. might work and other stuff useless!?
-	- remove the /api/ prefix code that I made (I think in codingtest.js or main.js?)
-	- recompile
-		mvn clean
-	    gulp clean
-		gulp dev
-    - rebuild mvn:
-	   mvn clean install
-    - redply
-	- test with browser, should show the same dumb error message as at beginning again (can't access localhost:8080/expenses)!
-   ==> if no, mv clean again and rebuild mvn again and try again
-   ==> if yes, then now edit the root config thing, regulp, remvn, redelpy, test again: 
-	   does it work now? if yes, can keep that instead of the more complicated RestangularProfile? thing I added. if no, clean, remvn, retry. working now? if not, undo the root config setting, redo my RestangularProfile? thing, clean, rebuild gulp and mvn and test again.
+To build this project:
+    - create a DB schema (e.g. alchemytectest) in your DB and create a table Expense in it (and possibly populate
+      it with some data):
+        the file src/main/setup/DB-setup.sql contains the necessary SQL code for that and can simply be executed to
+        create schema and table.
 
 
-
-
-Merged the web front end with the new backend with Webservices API and persistence. 
-
-NOTE:
-	- what has changed from the original project and project layout of the front end project?
-		- the project structure has been modified slightly: The former src/ folder has been renamed to source/,
-		  the folder static/ renamed to src/main/webapp/static/. And the HTML files and the png file from the 
-		  root folder have been moved to src/main/webapp/.
-
-
-
-To build the new project:
-    - edit the project so that it points to your database, e.g. a MySql DB:
-        - create a DB schema (e.g. alchemytectest) and create a table Expense in it:
-            TODO: add table definition sql code!
+    - edit the project so that it points to your database, e.g. a MySql DB:            
         - edit src/main/setup/glassfish-resources.xml
-            - this file defines a JDBC connection pool using a MySql DB: 
+            - this file defines a JDBC connection pool using a MySql DB:
                 Change it according to your DB, but leave the JNDI name and connection pool names unchanged.
+
         - have a look at src/main/resources/persistence.xml
                 You only have to change this file, if you changed the JNDI name of the connection in the
                 glassfish-resources.xml file.
-    
 
-TODO!:
-    - You also may have to define the JDBC connection and connection pool in the admin interface of your
-      application server. Either  
-      For Glassfish:
+    
+    - depending on your application server you also may have to define the JDBC connection and connection pool in
+      the admin interface of your application server. For Glassfish:
         - access admin interface:
             localhost:4848/
-        - TODO..!!
+        - use the JDBC Resources and JDBC Connection Pools menus inside the JDBC Resources menu as required
 
 
-
-    - in case you want to make changes to the front-end:
-        - make the changes in the files inside the source folder for anything concerning js, angular, less
+    - in case you want to make changes to the front-end: compile the front end files using Gulp
+        - make the changes in the files inside the source/ folder for anything concerning js, angular, less
         - or create or edit the HTML files inside the src/main/webapp/ folder (for HTML tasks):
 
         -> Everything inside the src/main/webapp folder is eventually served by the webserver.
-           The files inside src/main/webapp/static/ are generated by gulp from the files in your source folder.
+           The files inside src/main/webapp/static/ are generated by gulp from the files in the source/ folder.
            
         - after any change to the font end make sure the src/main/webapp/static/ folder gets updated with the
           newest changes. For that simply build the project with gulp:
@@ -72,115 +76,40 @@ TODO!:
       properties inside the app servers admin interface.
 
 
-    - backend is a maven project:
-      The files that make up the backend can be found inside src/main/java/ and src/main/resources/ and src/main/setup/.
-      To build them type the following in a command line inside your project folder or use your IDE to perform these
-      steps:
+    - compile the the whole project and the Java backend using Maven:
+      The files that make up the backend can be found inside src/main/java/ and src/main/resources/ and 
+      src/main/setup/. 
 
+      To build them type the following in a command line inside your project folder or use your IDE to perform
+      this:
         - mvn clean install
        
-           (deletes old build files and builds and packages the backend with the current front end files in it)
+          (deletes old build files and builds and packages the backend with the current front end files in it)
       
+
     - the build files created by Maven can be found in target/, either exploded in the folder
           target/AlchemyCodingTest-1.0-SNAPSHOT/ or in the archive target/AlchemyCodingTest-1.0-SNAPSHOT.war.
 
-        -> Deploy this as Java EE 7 Web application on an application server like Glassfish 4 and it should work.
-           Depending on your app servers port the AlchemyCodingTest app can be accessed like this:
+        -> Deploy this war file as Java EE 7 Web application on an application server like Glassfish 4 and it
+           should work.
+
+        -> Depending on your app servers port the AlchemyCodingTest app can be accessed like this:
                 localhost:8080/default.html
                 localhost:8080/api/expenses/
                 localhost:8080/api/expenses/1
+                localhost:8080/api/expenses/1/4
 
 
-TODO:
-- sometimes have to run 'mvn clean install' 2 times before the changes from the font end (source/..) propagate into the actual deployed application.?
 
-- make the gulp clean and gulp dev part of the mvn build?
+
+
+
+Potential Issues:
+----------------
+- after changing the font end (source/..) and recompiling the front end with Gulp and the whole project with Maven,
+  the changes to the are not always propagated into the deployed application!
+  Sometimes you have to run 'mvn clean install' or gulp 2 times before the changes from the font end (source/..)
+  propagate into the actual deployed application!?
+
+    -> make the gulp clean and gulp dev part of the mvn build?
   
-
-
-
-Without IDE in command line:
-TODO!
-
-
-In Netbeans or Eclipse:
-Open as existing Maven project in Netbeans or Eclipse. 
-Edit project properties and ensure the context path (in Netbeans run submenu) is set to '/'. 
-Create connection pool in Glassfish admin console (or the Java EE 7 application server of your choice):
- - new JDBC connection pool (NOTE: set these values according to your local database location and type):
-    - pool name: AlchemyCodingTestPool
-    - resource type: javax.sql.DataSource
-    - datasource classname: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
-    - description: Connection Pool for AlchemyCodingTest RESTful WS App
-    - add these properties to the connection pool (NOTE: set these values according to your local database location):
-        - URL = jdbc:mysql://localhost:3306/alchemytectest
-        - url = jdbc:mysql://localhost:3306/alchemytectest
-        - User = XXXXX
-        - Password = YYYY
-
-
-- Create JDBC resource which uses the connection pool.
-    - JNDI name: jdbc/alchemycodingtest
-    - connection pool: AlchemyCodingTestPool
-    - description: DB for AlchemyCodingTest RESTful WS App
-
-
-TODO:
-create a table in your db and put 1 line of sample data in it (e.g. ...)
-may have to set context root for app to "/" in app server admin interface (e.g. glassfish admin console).
-
-
-Test if webservices are working:
-    - launch the appliacation and then try to access the Webservices API of the application, e.g. like this:
-        http://localhost:8080/api/expenses/
-        http://localhost:8080/api/expenses/1
-        http://localhost:8080/api/expenses/1/2
-
-    - then try to access the HTML part of the application:
-        http://localhost:8080/default.html
-
-
-
-
-
-Goal
-====
-Produce a simple web-app backend to complement the supplied front-end code. Note that the front-end renders nicely in Chrome but has some issues in Firefox. This is deliberate - see the 'Extra Credit' section.
-
-Mandatory Work
---------------
-Fork this repository. Starting with the provided HTML, CSS, and JS, create a Java-based REST API that:
-
-1. Saves expenses as entered to a database.
-2. Retrieves them for display on the page. 
-3. Add a new column to the table displaying the VAT amount for each expense.
-4. Alter the README to contain instructions on how to build and run your app.
-
-VAT is the UK’s sales tax. It is 20% of the value of the expense, and is included in the amount entered by the user.
-
-Give our account `alchemytec` access to your fork, and send us an email when you’re done. Feel free to ask questions if anything is unclear, confusing, or just plain missing.
-
-Extra Credit
-------------
-There are rendering issues in Firefox. See if you can fix them.
-
-
-Questions
----------
-##### What frameworks can I use?
-That’s entirely up to you, as long as they’re OSS. We’ll ask you to explain the choices you’ve made.
-
-##### What application servers can I use?
-Anyone you like, as long as it’s available OSS. You’ll have to justify your decision. We use dropwizard and Tomcat internally. 
-
-##### What database should I use?
-MySQL or PostgreSQL. We use MySQL in-house.
-
-##### What will you be grading me on?
-Elegance, robustness, understanding of the technologies you use, tests, security. 
-
-##### Will I have a chance to explain my choices?
-Feel free to comment your code, or put explanations in a pull request within the repo. If we proceed to a phone interview, we’ll be asking questions about why you made the choices you made. 
-
-##### Why doesn’t the test include X?
-Good question. Feel free to tell us how to make the test better. Or, you know, fork it and improve it!

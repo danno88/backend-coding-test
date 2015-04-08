@@ -1,7 +1,4 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 package org.schragl.codingtest;
 
@@ -23,7 +20,8 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * Defines an Expense.
+ * 
  * @author dan
  */
 @Entity
@@ -77,7 +75,7 @@ public class Expense implements Serializable {
     public Expense(Integer id, Date date, float amount, String reason) {
         this.id = id;
         this.date = date;
-        this.amount = amount;    //inc VAT
+        this.amount = amount;  //inc VAT
         this.vat = amount / 6; //in UK: VAT always 20% of amount
         this.reason = reason;
     }
@@ -152,7 +150,7 @@ public class Expense implements Serializable {
 
     @Override
     public String toString() {
-        return "org.schragl.codingtest.Expense[ id=" + id + " ]";
+        return "org.schragl.codingtest.Expense[ id=" + id + "; date=" + date + "; amount=" + amount + "; vat=" + vat + ";  reason=\"" + reason + "\"; ]";
     }
     
 }
