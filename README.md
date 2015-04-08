@@ -120,10 +120,10 @@ To build this project:
 Potential Issues:
 ----------------
 * After changing the font end (source/..) and recompiling the front end with Gulp
-  and the whole project with Maven, the changes to the are not always propagated
-  into the deployed application! Sometimes you have to run 'mvn clean install'
-  or gulp 2 times before the changes from the font end (source/..) propagate into
-  the actual deployed application!?
+  and the whole project with Maven, the changes to the front end are not always
+  propagated into the deployed application! Sometimes you have to run 
+  'mvn clean install' or 'gulp dev' 2 times before the changes from the font end
+  (source/..) propagate into the actual deployed application!?
 
     -> Make the gulp clean and gulp dev part of the mvn build?
   
